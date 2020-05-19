@@ -1,16 +1,11 @@
-
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 
-	<title>AdminLTE 3 | Starter</title>
+	<title>LaraVue</title>
 	<!-- CSRF Token -->
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<link rel="stylesheet" href="/css/app.css">
@@ -78,10 +73,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 				</a>
 				<ul class="nav nav-treeview">
 					<li class="nav-item">
-					<a href="#" class="nav-link">
+					<router-link to="/users" class="nav-link">
 						<i class="fas fa-circle fa fa-users"></i>
 						<p>Users</p>
-					</a>
+					</router-link>
 					</li>
 				</ul>
 			</li>
@@ -92,10 +87,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 				</router-link>
 			</li>
 			<li class="nav-item">
-				<a href="#" class="nav-link">
+				<a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
 					<i class="nav-icon fas fa-power-off"></i>
 					<p>Logout</p>
 				</a>
+				<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+					@csrf
+				</form>
 			</li>
 		</ul>
 		</nav>
@@ -110,6 +108,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		<div class="content">
 			<div class="container-fluid">
 				<router-view></router-view>
+				<vue-progress-bar></vue-progress-bar>
 			</div><!-- /.container-fluid -->
 		</div>
 		<!-- /.content -->
