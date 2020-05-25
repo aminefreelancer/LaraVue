@@ -23,6 +23,11 @@ class UserController extends Controller
         return User::latest()->paginate(2);
     }
 
+    public function invoice()
+    {
+        return view('invoice');
+    }
+
     public function searchUser($query)
     {
         return $users = User::where('name', 'like', "%$query%")
