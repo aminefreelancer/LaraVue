@@ -86,5 +86,13 @@ Vue.component('pagination', require('laravel-vue-pagination'));
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    data: {
+        s: ""
+    },
+    methods: {
+        search() {
+            Fire.$emit('searching')
+        }
+    }
 });

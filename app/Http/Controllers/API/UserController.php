@@ -23,6 +23,13 @@ class UserController extends Controller
         return User::latest()->paginate(2);
     }
 
+    public function searchUser($query)
+    {
+        return $users = User::where('name', 'like', "%$query%")
+                    ->orWhere('email', 'like', "%$query%")
+                    ->paginate(2);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

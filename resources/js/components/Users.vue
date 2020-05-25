@@ -114,7 +114,6 @@
                 axios.get('api/users?page=' + page)
                     .then(response => {
                         this.users = response.data;
-                        console.log(response.data);
                     });
             },
             getUsers() {
@@ -219,6 +218,20 @@
         created() {
             this.getUsers();
             Fire.$on('refreshUsers', () => this.getUsers())
+            Fire.$on('searching', () => {
+                let query = this.$parent.s;
+                if(query.length){
+                    axios.get('/api/search/'+query)
+                    .then((result) => {
+                        this.users = result.data
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+                } else {
+                    this.getUsers();
+                }
+            })
         }
     }
 </script>
