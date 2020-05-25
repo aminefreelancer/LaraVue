@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
+   
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +20,7 @@ class UserController extends Controller
     public function index()
     {
         //
-        return User::latest()->paginate(10);
+        return User::latest()->paginate(2);
     }
 
     /**
@@ -50,6 +52,12 @@ class UserController extends Controller
     public function show($id)
     {
         //
+    }
+
+    public function profile(Request $request)
+    {
+        //
+        return Auth::User();
     }
 
     /**

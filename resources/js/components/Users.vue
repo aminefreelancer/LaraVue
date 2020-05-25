@@ -25,7 +25,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="user in users" :key="user.id">
+                    <tr v-for="user in users.data" :key="user.id">
                         <td>{{user.id}}</td>
                         <td>{{user.name}}</td>
                         <td>{{user.email}}</td>
@@ -46,6 +46,7 @@
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
+            <pagination align="center" :data="users" @pagination-change-page="getResults"></pagination>
           </div>
         </div>
         <div class="modal fade" id="addNew" tabindex="-1" role="dialog" aria-labelledby="addNewTitle" aria-hidden="true">
@@ -99,7 +100,7 @@
         data() {
             return {
                 editMode : false,
-                users : [],
+                users : {},
                 form: new Form({
                     id: '',
                     name: '',
@@ -109,9 +110,20 @@
             }
         }, 
         methods: {
+            getResults(page = 1) {
+                axios.get('api/users?page=' + page)
+                    .then(response => {
+                        this.users = response.data;
+                        console.log(response.data);
+                    });
+            },
             getUsers() {
                 this.$Progress.start()
-                axios.get("api/users").then(res => (this.users = res.data.data));
+                axios.get("api/user")
+                .then(res => (this.users = res.data))
+                .catch((error) => {
+                    console.log(error)
+                });
                 this.$Progress.finish()
             },
             addUser () {

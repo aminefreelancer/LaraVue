@@ -12,7 +12,8 @@ Vue.use(VueRouter)
 let routes = [
     { path: '/dashboard', component:  require('./components/Dashboard.vue').default},
     { path: '/users', component: require('./components/Users.vue').default },
-    { path: '/profile', component: require('./components/Profile.vue').default }
+    { path: '/profile', component: require('./components/Profile.vue').default },
+    { path: '/developer', component: require('./components/Developer.vue').default },
 ]
 const router = new VueRouter({
     mode: 'history',
@@ -55,8 +56,25 @@ window.Form = Form;
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 
+//Declare Passport Vue Components 
+Vue.component(
+    'passport-clients',
+    require('./components/passport/Clients.vue').default
+);
+Vue.component(
+    'passport-authorized-clients',
+    require('./components/passport/AuthorizedClients.vue').default
+);
+Vue.component(
+    'passport-personal-access-tokens',
+    require('./components/passport/PersonalAccessTokens.vue').default
+);
+
 //Add Component communication 
 window.Fire = new Vue();
+
+//Add Laravel Pagination component 
+Vue.component('pagination', require('laravel-vue-pagination'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
